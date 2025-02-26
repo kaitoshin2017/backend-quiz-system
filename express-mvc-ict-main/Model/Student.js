@@ -1,29 +1,13 @@
+// models/Student.js
+const mongoose = require('mongoose');
+
 const studentSchema = new mongoose.Schema({
-    FirstName: {
-        type: String,
-        required: [true, 'First name is required'],
-    },
-    LastName: {
-        type: String,
-        required: [true, 'Last name is required'],
-    },
-    Grade: {
-        type: String,
-        required: [true, 'Grade is required'],
-    },
-    Username: {
-        type: String,
-        required: [true, 'Username is required'],
-    },
-    Password: {
-        type: String,
-        required: [true, 'Password is required'],
-    }
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    strand: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    confirmPassword: { type: String, required: true }
 });
 
-// Create models for User and Student
-const User = mongoose.model('User', usersSchema);
-const Student = mongoose.model('Student', studentSchema);
-
-// Export both models
-module.exports = { User, Student };
+module.exports = mongoose.model('Student', studentSchema);
