@@ -1,13 +1,21 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const studentRoutes = require('./routes/studentRoutes');
+const teacherRoutes = require('./routes/teacherRoutes');
+
 const app = express();
+app.use(express.json());
 
-const port = 3000 || process.env.PORT;
+mongoose.connect('mongodb://localhost:27017/registrationDB', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log('MongoDB connected'))
+  .catch(err => console.error(err));
 
-const userRoute = require('./routes/user');
+app.use('/students', studentRoutes);
+app.use('/teachers', teacherRoutes);
 
-
-app.use('/', userRoute)
-
-app.listen(port, () => {
-    console.log('Server is running on port 3000');
- })
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
