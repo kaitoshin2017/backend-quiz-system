@@ -1,14 +1,16 @@
+
+const app = require('./src/app.js');
 const express = require('express');
 const mongoose = require('mongoose');
-const studentRoutes = require('./routes/studentRoutes');
-const teacherRoutes = require('./routes/teacherRoutes');
+const studentRoutes = require('./routes/studentRoutes.js');
+const teacherRoutes = require('./routes/teacherRoutes.js');
 
 const app = express();
 app.use(express.json());
 
 mongoose.connect('mongodb://localhost:27017/registrationDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 }).then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
 
@@ -19,3 +21,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
