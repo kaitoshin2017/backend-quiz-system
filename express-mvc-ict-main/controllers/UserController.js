@@ -1,4 +1,4 @@
-const User = require('../Model/User');
+const User = require('../models/usergg');
 
 exports.getUsers = async (req, res) => { 
     try {
@@ -9,7 +9,7 @@ exports.getUsers = async (req, res) => {
                 users
             }
         });
-
+zz
       
 
     } catch (error) {
