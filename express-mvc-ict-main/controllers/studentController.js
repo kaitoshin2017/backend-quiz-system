@@ -1,12 +1,13 @@
-const Student = require('../models/Student');
+const Student = require('../Model/Student');
 
 exports.registerStudent = async (req, res) => {
     try {
-        const student = await Student.create(req.body);
+        const { firstName, lastName, section, username, password } = req.body;
+        const newStudent = await Student.create({ firstName, lastName, section, username, password });
         res.status(201).json({
             status: 'success',
             data: {
-                student
+                student: newStudent
             }
         });
     } catch (error) {
