@@ -1,19 +1,27 @@
-const Student = require('../Model/Student');
+const Student = require('../models/studentModel');
+const bcrypt = require('bcrypt');
 
 exports.registerStudent = async (req, res) => {
+    const { firstName, lastName, section, username, password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+        return res.status(400).json({ message: 'Passwords do not match' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const student = new Student({
+        firstName,
+        lastName,
+        section,
+        username,
+        password: hashedPassword,
+    });
+
     try {
-        const { firstName, lastName, section, username, password } = req.body;
-        const newStudent = await Student.create({ firstName, lastName, section, username, password });
-        res.status(201).json({
-            status: 'success',
-            data: {
-                student: newStudent
-            }
-        });
+        await student.save();
+        res.status(201).json({ message: 'Student registered successfully' });
     } catch (error) {
-        res.status(400).json({
-            status: 'fail',
-            message: error.message
-        });
+        res.status(500).json({ message: 'Error registering student', error });
     }
 };
