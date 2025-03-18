@@ -25,3 +25,19 @@ exports.registerStudent = async (req, res) => {
         res.status(500).json({ message: 'Error registering student', error });
     }
 };
+
+exports.loginStudent = async (req, res) => {
+    const { username, password } = req.body;
+
+    const student = await Student.findOne({ username });
+    if (!student) {
+        return res.status(400).json({ message: 'Invalid username or password' });
+    }
+
+    const isMatch = await bcrypt.compare(password, student.password);
+    if (!isMatch) {
+        return res.status(400).json({ message: 'Invalid username or password' });
+    }
+
+    res.status(200).json({ message: 'Login successful', student });
+};

@@ -1,9 +1,8 @@
-// Update app.js
+// app.js
 const express = require('express');
 const mongoose = require('mongoose');
 const studentRoutes = require('./express-mvc-ict-main/routes/studentRoutes');
 const teacherRoutes = require('./express-mvc-ict-main/routes/teacherRoutes');
-const stloginRoutes = require('./express-mvc-ict-main/routes/stloginRoutes'); // Importing the new login routes
 
 const app = express();
 app.use(express.json());
@@ -15,7 +14,6 @@ mongoose.connect('mongodb://localhost:27017/studentDB', { useNewUrlParser: true,
 
 app.use('/api/students', studentRoutes);
 app.use('/api/teachers', teacherRoutes);
-app.use('/api/stlogin', stloginRoutes); // Adding the login routes
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
