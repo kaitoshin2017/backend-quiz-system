@@ -1,4 +1,3 @@
-// stloginRoutes.js
 const express = require('express');
 const router = express.Router();
 const stloginController = require('../controllers/stloginController');
