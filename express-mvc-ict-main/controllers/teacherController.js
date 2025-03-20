@@ -1,4 +1,4 @@
-// controllers/teacherController.js
+
 const Teacher = require('../models/teacherModel');
 const bcrypt = require('bcrypt');
 

@@ -1,4 +1,4 @@
-// routes/teacherRoutes.js
+
 const express = require('express');
 const { registerTeacher, loginTeacher } = require('../controllers/teacherController');
 
