@@ -2,7 +2,7 @@ const Student = require('../models/studentModel');
 const bcrypt = require('bcrypt');
 
 exports.registerStudent = async (req, res) => {
-    const { firstName, lastName, section, username, password, confirmPassword } = req.body;
+    const { firstName, lastName, section, username, password, confirmPassword, birthDate } = req.body;
 
     if (password !== confirmPassword) {
         return res.status(400).json({ message: 'Passwords do not match' });
@@ -16,6 +16,7 @@ exports.registerStudent = async (req, res) => {
         section,
         username,
         password: hashedPassword,
+        birthDate
     });
 
     try {

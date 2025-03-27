@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
@@ -7,6 +6,7 @@ const studentSchema = new mongoose.Schema({
     section: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    birthDate: { type: Date, required: true }
 });
 
 const Student = mongoose.model('Student', studentSchema);
